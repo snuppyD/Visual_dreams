@@ -18,30 +18,30 @@ export const CreateDreamPage = () => {
   const { errors } = useSelector((state) => state.dream);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  // const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("");
   const [capacity, setCapacity] = useState("");
   const [dreamImage, setDreamImage] = useState(null);
   const [dreamVideo, setDreamVideo] = useState(null);
   const [finalTime, setFinalTime] = useState(null)
 
-  // const handleCreateDream = useCallback(() => {
-  //   const formData = new FormData();
-  //   formData.append("name", name);
-  //   formData.append("price", price);
-  //   formData.append("description", description);
-  //   formData.append("capacity", capacity);
-  //   formData.append("dreamImage", dreamImage);
-  //   formData.append("dreamVideo", dreamVideo);
-  //   formData.append("finalTime", finalTime);
+  const handleCreateDream = useCallback(() => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("capacity", capacity);
+    formData.append("dreamImage", dreamImage);
+    formData.append("dreamVideo", dreamVideo);
+    formData.append("finalTime", finalTime);
     
 
-  //   dispatch(createDream(formData)).then((res) => {
-  //     if (!res.error) {
-  //       console.log(formData)
-  //       navigate(`${paths.dream}/${res.payload._id}`, { replace: true });
-  //     }
-  //   });
-  // }, [capacity, description, dispatch, name, navigate, dreamImage, price,finalTime, dreamVideo]);
+    dispatch(createDream(formData)).then((res) => {
+      if (!res.error) {
+        console.log(formData)
+        navigate(`${paths.dream}/${res.payload._id}`, { replace: true });
+      }
+    });
+  }, [capacity, description, dispatch, name, navigate, dreamImage, price,finalTime, dreamVideo]);
 
 
   useEffect(() => () => dispatch(resetDreamErrors()),[dispatch])
@@ -77,12 +77,12 @@ export const CreateDreamPage = () => {
           error={errors && errors.price && errors.price.message}
           onChange={(e) => setPrice(+e.target.value)}
         />
-        {/* <StyledInput
+        <StyledInput
           name="description"
           placeholder="Опис"
           error={errors && errors.description && errors.description.message}
           onChange={(e) => setDescription(e.target.value)}
-        /> */}
+        />
         <StyledInput
           name="capacity"
           placeholder="Місткість"
@@ -101,7 +101,8 @@ export const CreateDreamPage = () => {
           error={errors && errors.dreamVideo && errors.dreamVideo.message}
           onChange={(e) => setDreamVideo(e.target.value)}
         />
-        <Todo name={name} price={price} capacity={capacity} dreamImage={dreamImage} dreamVideo={dreamVideo} finalTime={finalTime} />
+        <Button onClick={handleCreateDream}>Створити</Button>
+        {/* <Todo name={name} price={price} capacity={capacity} dreamImage={dreamImage} dreamVideo={dreamVideo} finalTime={finalTime} /> */}
         
       </StyledForm>
       

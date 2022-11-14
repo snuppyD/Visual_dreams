@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, {  useEffect,useState } from "react";
 import styles from "./styles.module.css";
 import { ContentWrapper } from "../../components/content-wrapper";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,14 +13,23 @@ export const DreamPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { dream, isLoading } = useSelector((state) => state.dream);
+  const [finalTime, setFinalTime] = useState({ dream: new Date() })
 
-  // const [edit, setEdit] = useState(false)
-  // useEffect(() => {
-  //   navigate('/order');
-  // }, [id, navigate]);
+  const time = () => {
+    const dateStart= new Date();
+    const dateEnd = new Date(finalTime.dream)
+    const oneDay = 1000 * 60 * 60 * 24
+    const diffInTime = dateEnd.getTime() - dateStart.getTime()
+    const diffInDays = Math.round(diffInTime / oneDay)
+    return diffInDays
+  }
 
   useEffect(() => {
-    dispatch(getDream(id)) 
+    dispatch(getDream(id)).then((dream) => {
+      if (dream) {
+        setFinalTime({ dream: new Date(dream.finalTime) })
+      }
+    })
   }, [dispatch, id]);
 
   if (isLoading) return <Spinner />;
@@ -32,6 +41,7 @@ export const DreamPage = () => {
           <Button onClick={() => navigate(-1)} >
             Назад
           </Button>
+          {finalTime? <StyledDreamTitle>{ time()}</StyledDreamTitle> : false}
           <StyledDreamTitle>{dream.name}</StyledDreamTitle>
           <StyledPrice>{dream.price}$</StyledPrice>
           <Button
@@ -40,13 +50,6 @@ export const DreamPage = () => {
           >
             На головну
           </Button>
-          {/* {dream.description.map(elem => {
-            
-              console.log(elem)
-            
-            return <StyledDes>{elem.title}</StyledDes> */}
-          {/* })} */}
-          {/* <StyledDes>{dream.description.title}</StyledDes> */}
         </StyledDesc>
         <StyledDesc>
           <StyledImgContent src={dream.dreamImage} alt="" />

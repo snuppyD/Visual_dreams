@@ -25,10 +25,6 @@ const updateDream = async dreamData => {
     headers: { 'content-type': 'multipart/form-data' },
   }
   const id = dreamData.get('_id')
-  // console.log(id)
-  for (let test of dreamData) {
-    console.log(test)
-  }
   const dream = await axios.post(`/api/dreams/updateDream/${id}`, dreamData, config)
   return dream.data
 }

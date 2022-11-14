@@ -74,59 +74,35 @@ export const EditDreamPage = () => {
         <StyledForm enctype="multipart/form-data" method="post" name="fileinfo">
           <h1>Редагувати мрію</h1>
           <form>
-            {/* {chance ? 
-              (<StyledDatePicker
-                placeholderText="Оберіть кінцеву дату"
-                selected={chance.finaltime}
-                onChange={
-                  setFinalTime(chance.finalTime: e.target.value)
-                }}
-                minDate={new Date()}
-              />
-            ) : (
-              false
-            )} */}
-            {chance ? (
-              <StyledInput name="name" placeholder="Назва мрії" defaultvalue={chance.name} onChange={e => setName({ name: e.target.value })} />
-            ) : (
-              false
-            )}
-            {chance ? (
-              <StyledInput name="price" placeholder="Ціна мрії" value={chance.price} onChange={e => setPrice({ price: +e.target.value })} />
-            ) : (
-              false
-            )}
-            {chance ? (
-              <StyledInput
-                name="capacity"
-                placeholder="Місткість"
-                value={chance.capacity}
-                onChange={e => setCapacity({ capacity: e.target.value })}
-              />
-            ) : (
-              false
-            )}
-            {chance ? (
-              <StyledInput
-                name="dreamImage"
-                placeholder="Фото мрії"
-                value={chance.dreamImage}
-                onChange={e => setDreamImage({ dreamImage: e.target.value })}
-              />
-            ) : (
-              false
-            )}
-            {chance ? (
-              <StyledInput
-                name="dreamVideo"
-                placeholder="Відео мрії"
-                value={chance.dreamVideo}
-                onChange={e => setDreamVideo({ dreamVideo: e.target.value })}
-              />
-            ) : (
-              false
-            )}
-            {/* {<StyledInput name="dreamVideo" placeholder="Відео мрії" value={description?.dream} onChange={e => setDescription(e.target.value)} />: false} */}
+            <StyledDatePicker
+              placeholderText="Оберіть кінцеву дату"
+              selected={finalTime.dream}
+              onChange={e => {
+                setFinalTime(e.target.value)
+              }}
+              minDate={new Date()}
+            />
+            <StyledInput name="name" placeholder="Назва мрії" value={dream.name} onChange={e => setName(e.target.value)} />
+
+            <StyledInput name="price" placeholder="Ціна мрії" value={price?.dream} onChange={e => setPrice({ price: +e.target.value })} />
+
+            <StyledInput name="capacity" placeholder="Місткість" value={capacity?.dream} onChange={e => setCapacity({ capacity: e.target.value })} />
+
+            <StyledInput
+              name="dreamImage"
+              placeholder="Фото мрії"
+              value={dreamImage?.dream}
+              onChange={e => setDreamImage({ dreamImage: e.target.value })}
+            />
+
+            <StyledInput
+              name="dreamVideo"
+              placeholder="Відео мрії"
+              value={dreamVideo?.dream}
+              onChange={e => setDreamVideo({ dreamVideo: e.target.value })}
+            />
+
+            <StyledInput name="dreamVideo" placeholder="Відео мрії" value={description?.dream} onChange={e => setDescription(e.target.value)} />
           </form>
           <Todo
             id={id}
