@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {Todo} from '../../components/todo/Todo'
 import 'react-datepicker/dist/react-datepicker.css'
 import { Button } from "../../components/button";
 import { ContentWrapper } from "../../components/content-wrapper";
-// import { Input } from "../../components/input";
 import { paths } from "../../paths";
 import { createDream, resetDreamErrors } from "../../store/dream/dreamSlice";
 import styles from "./styles.module.css";
@@ -19,7 +17,6 @@ export const CreateDreamPage = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [capacity, setCapacity] = useState("");
   const [dreamImage, setDreamImage] = useState(null);
   const [dreamVideo, setDreamVideo] = useState(null);
   const [finalTime, setFinalTime] = useState(null)
@@ -29,7 +26,6 @@ export const CreateDreamPage = () => {
     formData.append("name", name);
     formData.append("price", price);
     formData.append("description", description);
-    formData.append("capacity", capacity);
     formData.append("dreamImage", dreamImage);
     formData.append("dreamVideo", dreamVideo);
     formData.append("finalTime", finalTime);
@@ -41,13 +37,13 @@ export const CreateDreamPage = () => {
         navigate(`${paths.dream}/${res.payload._id}`, { replace: true });
       }
     });
-  }, [capacity, description, dispatch, name, navigate, dreamImage, price,finalTime, dreamVideo]);
+  }, [ description, dispatch, name, navigate, dreamImage, price,finalTime, dreamVideo]);
 
 
   useEffect(() => () => dispatch(resetDreamErrors()),[dispatch])
 
   return (
-    <ContentWrapper className={styles.createPlane}>
+    <ContentWrapper className={styles.createDream}>
       <Button
         onClick={() => navigate(-1)}
         isBackButton={true}
@@ -84,16 +80,10 @@ export const CreateDreamPage = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
         <StyledInput
-          name="capacity"
-          placeholder="Місткість"
-          error={errors && errors.capacity && errors.capacity.message}
-          onChange={(e) => setCapacity(e.target.value)}
-        />
-        <StyledInput
           name="dreamImage"
-          type="file"
+          placeholder="Ваше фото"
           error={errors && errors.dreamImage && errors.dreamImage.message}
-          onChange={(e) => setDreamImage(e.target.files[0])}
+          onChange={(e) => setDreamImage(e.target.value)}
         />
         <StyledInput
           name="dreamVideo"
@@ -102,7 +92,6 @@ export const CreateDreamPage = () => {
           onChange={(e) => setDreamVideo(e.target.value)}
         />
         <Button onClick={handleCreateDream}>Створити</Button>
-        {/* <Todo name={name} price={price} capacity={capacity} dreamImage={dreamImage} dreamVideo={dreamVideo} finalTime={finalTime} /> */}
         
       </StyledForm>
       

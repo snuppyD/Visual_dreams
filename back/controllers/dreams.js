@@ -35,14 +35,10 @@ const deleteDream = async (req, res) => {
 
 const updateDream = async (req, res) => {
   try {
-    const { name, price, description, capacity, dreamVideo, finalTime } = req.body
+    const { name, price, description, dreamVideo, finalTime } = req.body
     // console.log(req.body)
 
-    const updateDreams = await Dream.updateOne(
-      { _id: req.params.id },
-      { name, price, description, capacity, dreamVideo, finalTime },
-      { upsert: true }
-    )
+    const updateDreams = await Dream.updateOne({ _id: req.params.id }, { name, price, description, dreamVideo, finalTime }, { upsert: true })
     console.log(updateDreams)
     res.send({ data: updateDreams })
   } catch (err) {
@@ -66,20 +62,8 @@ const createDream = async (req, res) => {
     errors.description = { message: 'Write your description' }
   }
 
-  if (req.body.description.length > 700) {
-    errors.description = { message: 'Many words' }
-  }
-
-  if (!req.body.capacity) {
-    errors.capacity = { message: 'Вкажіть кількість' }
-  }
-
-  if (req.body.capacity.length > 2) {
-    errors.capacity = { message: 'Вместимость не может быть больше 99' }
-  }
-
-  if (!req.file) {
-    errors.dreamImage = { message: "Upload your dream's photo" }
+  if (!req.body.dreamImage) {
+    errors.dreamImage = { message: 'Write link in photo' }
   }
 
   if (!req.body.dreamVideo) {
@@ -95,14 +79,13 @@ const createDream = async (req, res) => {
   }
 
   try {
-    const { name, price, description, capacity, dreamVideo, finalTime } = req.body
+    const { name, price, description, dreamVideo, dreamImage, finalTime } = req.body
 
     const dream = await Dream.create({
       name,
       price,
       description,
-      capacity,
-      dreamImage: `http://localhost:${process.env.PORT}/static/${req.file.filename}`,
+      dreamImage,
       dreamVideo,
       finalTime,
     })

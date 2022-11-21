@@ -2,20 +2,19 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const StyledNav = styled.div`
-  position: absolute;
-  height: 80px;
+  height: 50px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
+
+  align-items: end;
+  justify-content: end;
 `
 export const Wpapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: end;
 `
 export const StyledLink = styled(Link)`
   display: flex;
-  justify-content: flex-end;
+  justify-content: end;
   flex-grow: 1;
   text-decoration: none;
   font-size: 20px;

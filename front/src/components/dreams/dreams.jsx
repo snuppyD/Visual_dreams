@@ -2,7 +2,6 @@ import React, { useEffect,useState, useRef } from "react";
 import Popup from 'reactjs-popup';
 import { useDispatch, useSelector } from "react-redux";
 import { useSortByName,useSortByTime,useSortByPrice } from "../../hooks/useSortDreams";
-import { paths } from "../../paths";
 import { getDreams } from "../../store/dreams/dreamsSlice";
 import { Button } from "../button";
 import { ContentWrapper } from "../content-wrapper";
@@ -70,7 +69,7 @@ export const Dreams = () => {
       
       </ContentWrapper>
       <StyledSort>
-        <ContentWrapper className={styles.planesHeader}>
+        <ContentWrapper className={styles.dreamsHeader}>
         <StyledInputSearch
 					type="text"
 					placeholder="Search"
@@ -107,7 +106,7 @@ export const Dreams = () => {
         </ContentWrapper>
         {/* </div> */}
       </StyledSort>
-      <ContentWrapper className={styles.planesGrid}>
+      <ContentWrapper className={styles.dreamsGrid}>
       {/* <div> */}
         {sorted()}
       </ContentWrapper>

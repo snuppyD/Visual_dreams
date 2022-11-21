@@ -13,10 +13,6 @@ const DreamsSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  capacity: {
-    type: String,
-    required: true,
-  },
   dreamImage: {
     type: String,
     required: true,

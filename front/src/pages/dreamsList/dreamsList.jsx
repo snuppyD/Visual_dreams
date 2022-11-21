@@ -5,7 +5,7 @@ import { Dreams } from "../../components/dreams";
 export const DreamList = () => {
   return (
     <React.Fragment>
-      <Header/>
+      <Header />
       <Dreams />
     </React.Fragment>
   );

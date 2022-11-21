@@ -1,4 +1,4 @@
-.planesGrid {
+.dreamsGrid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
@@ -27,7 +27,7 @@
     padding: 8px 12px;
 }
 
-.planesHeader {
+.dreamsHeader {
     justify-content: space-between;
     align-items: center;
 }
