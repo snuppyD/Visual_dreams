@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { paths } from "../../paths";
 import { StyledDay,StyledInfo,StyledTitle,StyledPrice,StyledImg } from "../../styled/Dream-item.styled";
+
 // import styles from "./styles.module.css";
 
 export const DreamItem = ({
@@ -13,13 +14,18 @@ export const DreamItem = ({
   dreamVideo= ''
   
 }) => {
+  
   const time = () => {
     const dateStart= new Date();
     const dateEnd = new Date(finalTime)
     const oneDay = 1000 * 60 * 60 * 24
     const diffInTime = dateEnd.getTime() - dateStart.getTime()
-    const diffInDays = Math.round(diffInTime / oneDay)
+    let diffInDays = Math.round(diffInTime / oneDay)
+    if (diffInDays < 0) {
+    return diffInDays = 0
+  } else {
     return diffInDays
+  }
   }
   return (
     <Link to={`${paths.dream}/${_id}`} >

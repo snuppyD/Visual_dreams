@@ -23,6 +23,7 @@ export const EditDreamPage = () => {
   const [finalTime, setFinalTime] = useState()
 
   const handleUpdateDream = () => {
+    const createTime = new Date()
     const formData = new FormData()
     formData.append('_id', id)
     formData.append('name', name)
@@ -31,6 +32,11 @@ export const EditDreamPage = () => {
     formData.append('dreamImage', dreamImage)
     formData.append('dreamVideo', dreamVideo)
     formData.append('finalTime', finalTime)
+    formData.append('createTime', createTime)
+    for (let pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+  }
+
 
     dispatch(updateDream(formData)).then(res => {
       if (!res.error) {

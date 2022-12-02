@@ -9,6 +9,8 @@ import { createDream, resetDreamErrors } from "../../store/dream/dreamSlice";
 import styles from "./styles.module.css";
 import { StyledForm,StyledDatePicker } from "../../styled/CreateDreamPage.styled";
 import { StyledInput } from "../../styled/Input.Styled";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const CreateDreamPage = () => {
   const navigate = useNavigate();
@@ -21,19 +23,33 @@ export const CreateDreamPage = () => {
   const [dreamVideo, setDreamVideo] = useState(null);
   const [finalTime, setFinalTime] = useState(null)
 
+  const notify = () => {
+    toast('🦄 Dream created!', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
+
   const handleCreateDream = useCallback(() => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("price", price);
     formData.append("description", description);
     formData.append("dreamImage", dreamImage);
-    formData.append("dreamVideo", dreamVideo);
+    formData.append("dreamVideo", dreamVideo.slice(23));
     formData.append("finalTime", finalTime);
     
 
     dispatch(createDream(formData)).then((res) => {
       if (!res.error) {
         console.log(formData)
+        notify();
         navigate(`${paths.dream}/${res.payload._id}`, { replace: true });
       }
     });
@@ -43,7 +59,20 @@ export const CreateDreamPage = () => {
   useEffect(() => () => dispatch(resetDreamErrors()),[dispatch])
 
   return (
+    
     <ContentWrapper className={styles.createDream}>
+      <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       <Button
         onClick={() => navigate(-1)}
         isBackButton={true}
@@ -91,7 +120,8 @@ export const CreateDreamPage = () => {
           error={errors && errors.dreamVideo && errors.dreamVideo.message}
           onChange={(e) => setDreamVideo(e.target.value)}
         />
-        <Button onClick={handleCreateDream}>Створити</Button>
+        <Button onClick={()=>{handleCreateDream()}}>Створити</Button>
+        {/* <Button onClick={notify}>toasty</Button> */}
         
       </StyledForm>
       

@@ -1,20 +1,17 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Button } from '../../components/button'
-import { createDream, resetDreamErrors, updateDream } from '../../store/dream/dreamSlice'
-import { paths } from '../../paths'
+import { resetDreamErrors, updateDream } from '../../store/dream/dreamSlice'
 import { StyledInput } from '../../styled/Input.Styled'
 import { TodoStyled, TodoTextStyled, BtnStyled, EditPlusStyled, EditStyled, UlStyled } from '../../styled/Todo.styled'
 
-export const Todo = ({ description, id, name, price, capacity, dreamImage, dreamVideo, finalTime }) => {
+export const Todo = ({ dream }) => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [list, setList] = useState([])
+  const [list, setList] = useState([{ id: '', title: dream.descriptionTodo }])
   const [inputText, setInputText] = useState('')
   const [editing, setEditing] = useState(false)
   const [editText, setEditText] = useState('')
   const [editingElement, setEditingElement] = useState('')
+
   const saveEditedElement = id => {
     setEditing(true)
     const updatedList = [...list].map(item => {
@@ -48,42 +45,28 @@ export const Todo = ({ description, id, name, price, capacity, dreamImage, dream
   }
 
   const handleUpdateDream = () => {
+    const res = list.map(elem => {
+      const arr = []
+      arr.push(elem.title)
+      return arr
+    })
+    const result = [].concat(...res)
     const formData = new FormData()
-    formData.append('_id', id)
-    formData.append('name', name)
-    formData.append('price', price)
-    formData.append('description', description)
-    formData.append('capacity', capacity)
-    formData.append('dreamImage', dreamImage)
-    formData.append('dreamVideo', dreamVideo)
-    formData.append('finalTime', finalTime)
-    // const s = formData.getAll('price', 'description', 'capacity', 'dreamImage', 'dreamVideo', 'finalTime')
-    // for (let pair of formData.entries()) {
-    //   console.log(pair[0] + ', ' + pair[1])
-    // }
-    console.log(formData)
-    // const param = new URLSearchParams(formData)
-    dispatch(updateDream(formData))
+    formData.append('_id', dream._id)
+    formData.append('descriptionTodo', result)
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1])
+    }
+    dispatch(updateDream(formData)).then(() => {
+      console.log('dream updated')
+    })
   }
 
-  useEffect(() => () => dispatch(resetDreamErrors()), [dispatch])
+  useEffect(() => {
+    dispatch(resetDreamErrors())
+  }, [dispatch])
   return (
     <>
-      {description ? (
-        <StyledInput
-          id="completed"
-          type="text"
-          value={inputText}
-          onChange={e => {
-            setInputText(e.target.value)
-          }}
-          placeholder="Запиши задачу"
-        />
-      ) : (
-        false
-      )}
-      <BtnStyled onClick={() => createNewTodo(inputText)}>Add</BtnStyled>
-
       <UlStyled>
         {list.map(item => {
           return (
@@ -116,7 +99,19 @@ export const Todo = ({ description, id, name, price, capacity, dreamImage, dream
             </TodoStyled>
           )
         })}
-        <Button onClick={handleUpdateDream}>Створити</Button>
+        <StyledInput
+          id="completed"
+          type="text"
+          value={inputText}
+          onChange={e => {
+            setInputText(e.target.value)
+          }}
+          placeholder="Запиши задачу"
+        />
+
+        <BtnStyled onClick={() => createNewTodo(inputText)}>Add</BtnStyled>
+        <BtnStyled onClick={() => handleUpdateDream()}>Update</BtnStyled>
+        {/* <Button onClick={handleUpdateDream}>Створити</Button> */}
       </UlStyled>
     </>
   )

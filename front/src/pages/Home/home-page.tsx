@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { paths } from '../../paths'
+import { Text, LanguageContext } from '../../components/containers-language/language';
+
 import { StyledGeneralText, StyledLinkAnimation, StyledBanner } from '../../styled/Home-page.styled'
 
+
 export const HomePage = () => {
+  // const [clickText, setClickText] = useState();
+  // const [selectedOption, setSelectedOption] = useState();
+  const { dictionary } = useContext(LanguageContext);
   return (
     <StyledBanner>
-      <StyledGeneralText>Сайт зі створення власних мрій</StyledGeneralText>
+      <StyledGeneralText><Text tid="exploreHeader" /></StyledGeneralText>
       <StyledLinkAnimation to={paths.createDream}>Create New Dreams</StyledLinkAnimation>
     </StyledBanner>
   )

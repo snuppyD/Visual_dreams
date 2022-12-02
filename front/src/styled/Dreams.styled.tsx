@@ -8,6 +8,10 @@ export const StyledSort = styled.div`
   margin-bottom: 50px;
   display: flex;
   align-items: center;
+  @media (max-width: 844px) {
+  margin-bottom: 50px;
+
+  }
 `
 export const StyledLink = styled(Link)`
   background: linear-gradient(180deg, #ffffff 0%, #d9dfff 100%);
@@ -24,4 +28,48 @@ export const StyledPopUp = styled.button`
   border-radius: 20px;
   color: #000000;
   padding: 8px 12px;
+`
+export const SettingsStled = styled.div`
+  display: flex;
+  max-width: 1234px;
+  width: 100%;
+  margin: 0px auto;
+  padding: 0 30px;
+  position: relative;
+  z-index: 2;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 390px) {
+    flex-direction: column;
+  }
+`
+export const DreamsSortStled = styled.div`
+  display: flex;
+  max-width: 1234px;
+  width: 100%;
+  margin: 0px auto;
+  padding: 0 30px;
+  position: relative;
+  z-index: 2;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 390px) {
+    flex-direction: column;
+  }
+`
+export const DreamsGrid = styled.div`
+display: flex;
+    max-width: 1234px;
+    width: 100%;
+    margin: 0px auto;
+    padding: 0 30px;
+    position: relative;
+    z-index: 2;
+  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+    @media (max-width: 390px) {
+    justify-content: column;
+  }
 `

@@ -21,17 +21,22 @@ function getNumberOfDays(start, end) {
   return diffInDays
 }
 
-console.log(getNumberOfDays('2/1/2021', '3/1/2021'), typeof diffInDays)
+console.log(getNumberOfDays('2/1/2021', '3/1/2021'))
 
 // const date = new Date().toLocaleDateString()
 // console.log(date)
 // console.log(typeof date)
-let birthday = new Date(1995, 11, 17)
-birthday = new Date().toLocaleDateString("en-US")
+let birthday = new Date(1995, 11, 17).toLocaleDateString()
+console.log(birthday)
+// birthday = new Date().toLocaleDateString("en-US")
 
 // console.log(birthday)
 
-const arr = [{id:2, text:'Hello'}, {id:3, text:'people'},{id:4,text:'try'}]
+const arr = [
+  { id: 2, text: 'Hello' },
+  { id: 3, text: 'people' },
+  { id: 4, text: 'try' },
+]
 
 // const search = (x,arr) => {
 //   const test = arr.filter(el => {

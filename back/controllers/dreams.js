@@ -35,10 +35,13 @@ const deleteDream = async (req, res) => {
 
 const updateDream = async (req, res) => {
   try {
-    const { name, price, description, dreamVideo, finalTime } = req.body
-    // console.log(req.body)
+    const { name, price, description, dreamVideo, finalTime, descriptionTodo } = req.body
 
-    const updateDreams = await Dream.updateOne({ _id: req.params.id }, { name, price, description, dreamVideo, finalTime }, { upsert: true })
+    const updateDreams = await Dream.updateOne(
+      { _id: req.params.id },
+      { name, price, description, dreamVideo, finalTime, descriptionTodo },
+      { upsert: true }
+    )
     console.log(updateDreams)
     res.send({ data: updateDreams })
   } catch (err) {
@@ -79,15 +82,16 @@ const createDream = async (req, res) => {
   }
 
   try {
-    const { name, price, description, dreamVideo, dreamImage, finalTime } = req.body
+    const { name, price, description, dreamVideo, dreamImage, finalTime, descriptionTodo } = req.body
 
     const dream = await Dream.create({
       name,
       price,
       description,
       dreamImage,
-      dreamVideo,
+      dreamVideo: `https://www.youtube-nocookie.com${req.body.dreamVideo}`,
       finalTime,
+      descriptionTodo,
     })
 
     res.status(201).json(dream)

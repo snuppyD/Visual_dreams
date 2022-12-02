@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const StyledNav = styled.div`
-  height: 50px;
+  height: 30px;
   display: flex;
-
+  transition: all 0.25s escape;
   align-items: end;
-  justify-content: end;
+  justify-content: space-between;
 `
 export const Wpapper = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ export const StyledLink = styled(Link)`
   flex-grow: 1;
   text-decoration: none;
   font-size: 20px;
-  color: #fff;
+  color: ${props => props.theme.title};
   text-transform: uppercase;
   font-weight: bold;
   font-family: poppins;

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 export const StyledBanner = styled.div`
   width: 100%;
-  height: 100vh;
-  background: url(https://images.pexels.com/photos/358528/pexels-photo-358528.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  height: 97.5vh;
+  background: ${props => props.theme.background};
   background-position: center;
   -webkit-background-size: cover;
   background-size: cover;
@@ -13,7 +13,7 @@ export const StyledBanner = styled.div`
   justify-content: center;
   flex-direction: column;
   font-size: 2vw;
-  color: #fff;
+  color: ${props => props.theme.title};
 `
 export const Animate = keyframes`
 0%{
@@ -28,6 +28,10 @@ export const StyledGeneralText = styled.h2`
   font-size: 65px;
   margin: 0 0 25px;
   animation: 2s ${Animate} 1;
+  @media (max-width: 844px) {
+    margin-left: 55px;
+
+  }
 `
 export const StyledLinkAnimation = styled(Link)`
   text-decoration: none;

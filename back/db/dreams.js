@@ -27,6 +27,9 @@ const DreamsSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  descriptionTodo: {
+    type: Array,
+  },
 })
 
 module.exports = mongoose.model('Dream', DreamsSchema)

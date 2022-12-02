@@ -24,7 +24,7 @@ export const TodoTextStyled = styled.div`
   font-size: 1.5rem;
   height: 2rem;
   overflow: hidden;
-  &:hover,
+  /* &:hover,
   &:focus {
     position: absolute;
     width: fit-content;
@@ -33,7 +33,7 @@ export const TodoTextStyled = styled.div`
     background-color: rgba(37, 175, 112, 0.74);
     overflow: visible;
     z-index: 10;
-  }
+  } */
 `
 export const BtnStyled = styled.button`
   font-size: 1rem;

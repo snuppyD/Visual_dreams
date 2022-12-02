@@ -4,7 +4,7 @@ import dreamsService from '../services/dreamsService'
 export const getDreams = createAsyncThunk('GET_DREAMS', async (_, thunkAPI) => {
   try {
     return await dreamsService.getDreams()
-  } catch (error) {
+  } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response.data)
   }
 })
@@ -16,6 +16,11 @@ const dreamsSlice = createSlice({
     isError: false,
     isLoading: false,
     message: '',
+  },
+  reducers: {
+    resetDreamErrors: state => {
+      state.isError = false;
+    },
   },
   extraReducers: builder => {
     builder
@@ -29,7 +34,7 @@ const dreamsSlice = createSlice({
       .addCase(getDreams.rejected, (state, action) => {
         state.isError = true
         state.isLoading = false
-        state.message = action.payload.message
+        // state.message = action.payload.message
         state.dreams = null
       })
   },

@@ -30,4 +30,11 @@
 .dreamsHeader {
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 844px) {
+        .dreamsHeader {
+            flex-direction: column;
+            color: red;
+        }
+        
+    }
 }

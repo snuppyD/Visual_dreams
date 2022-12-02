@@ -8,9 +8,10 @@ import { ContentWrapper } from "../content-wrapper";
 import { DreamItem } from "../dream-item";
 import { Spinner } from "../spinner";
 import styles from "./styles.module.css";
-import { StyledSort,StyledPopUp } from "../../styled/Dreams.styled";
+import { StyledSort,StyledPopUp,SettingsStled, } from "../../styled/Dreams.styled";
 import { StyledInputSearch } from "../../styled/CreateDreamPage.styled";
 import { CreateDreamPage } from "../../pages/create-dream-page/create-dream-page";
+
 
 
 export const Dreams = () => {
@@ -33,6 +34,8 @@ export const Dreams = () => {
   const filtered = searchDream.filter(dream => {
     return dream.name.toLowerCase().includes(value.toLowerCase())
   })
+
+  
 
   const sorted = () => {
     if (sort === 'name') {
@@ -65,11 +68,8 @@ export const Dreams = () => {
   return (
     <div>
       
-      <ContentWrapper >
-      
-      </ContentWrapper>
       <StyledSort>
-        <ContentWrapper className={styles.dreamsHeader}>
+        <SettingsStled>
         <StyledInputSearch
 					type="text"
 					placeholder="Search"
@@ -93,6 +93,7 @@ export const Dreams = () => {
           >
             Sort by time {`${isDescSortByTime ? "-" : "+"}`}
           </Button>
+
           <Popup
         ref={ref}
         trigger={
@@ -103,7 +104,7 @@ export const Dreams = () => {
       >
         <CreateDreamPage />
       </Popup>
-        </ContentWrapper>
+        </SettingsStled>
         {/* </div> */}
       </StyledSort>
       <ContentWrapper className={styles.dreamsGrid}>

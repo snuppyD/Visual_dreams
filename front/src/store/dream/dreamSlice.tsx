@@ -4,7 +4,7 @@ import dreamsService from '../services/dreamsService'
 export const getDream = createAsyncThunk('GET_DREAM', async (id, thunkAPI) => {
   try {
     return await dreamsService.getDream(id)
-  } catch (error) {
+  } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response.data)
   }
 })
@@ -12,7 +12,7 @@ export const getDream = createAsyncThunk('GET_DREAM', async (id, thunkAPI) => {
 export const createDream = createAsyncThunk('CREATE_DREAM', async (dreamData, thunkAPI) => {
   try {
     return await dreamsService.createDream(dreamData)
-  } catch (error) {
+  } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response.data)
   }
 })
@@ -20,7 +20,7 @@ export const createDream = createAsyncThunk('CREATE_DREAM', async (dreamData, th
 export const deleteDream = createAsyncThunk('DELETE_DREAM', async (id, thunkAPI) => {
   try {
     return await dreamsService.deleteDream(id)
-  } catch (error) {
+  } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response.data)
   }
 })
@@ -28,7 +28,7 @@ export const deleteDream = createAsyncThunk('DELETE_DREAM', async (id, thunkAPI)
 export const updateDream = createAsyncThunk('UPDATE_DREAM', async (dreamData, thunkAPI) => {
   try {
     return await dreamsService.updateDream(dreamData)
-  } catch (error) {
+  } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response.data)
   }
 })
@@ -41,23 +41,10 @@ const dreamSlice = createSlice({
     isLoading: false,
     message: '',
     errors: null,
-    theme: 'dark',
   },
   reducers: {
     resetDreamErrors: state => {
       state.errors = null
-    },
-    changeTheme(state) {
-      switch (state.theme) {
-        case 'dark':
-          state.theme = 'light'
-          return
-        case 'light':
-          state.theme = 'dark'
-          return
-        default:
-          state.theme = 'dark'
-      }
     },
   },
   extraReducers: builder => {
@@ -72,7 +59,7 @@ const dreamSlice = createSlice({
       .addCase(getDream.rejected, (state, action) => {
         state.isError = true
         state.isLoading = false
-        state.message = action.payload.message
+        // state.message = action.payload.message
         state.dream = null
       })
       .addCase(createDream.pending, state => {
@@ -86,7 +73,7 @@ const dreamSlice = createSlice({
       .addCase(createDream.rejected, (state, action) => {
         state.isError = true
         state.isLoading = false
-        state.errors = action.payload
+        // state.errors = action.payload
       })
       .addCase(deleteDream.pending, state => {
         state.isLoading = true
@@ -99,7 +86,7 @@ const dreamSlice = createSlice({
       .addCase(deleteDream.rejected, (state, action) => {
         state.isError = true
         state.isLoading = false
-        state.errors = action.payload
+        // state.errors = action.payload
       })
       .addCase(updateDream.pending, state => {
         state.isLoading = true
@@ -112,12 +99,10 @@ const dreamSlice = createSlice({
       .addCase(updateDream.rejected, (state, action) => {
         state.isError = true
         state.isLoading = false
-        state.dream = action.payload[0]
+        // state.dream = action.payload[0]
       })
   },
 })
 
 export const { resetDreamErrors } = dreamSlice.actions
-export const selectTheme = state => state.dreamSlice.theme
-export const changeTheme = dreamSlice.actions
 export default dreamSlice.reducer

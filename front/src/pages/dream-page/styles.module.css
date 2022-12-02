@@ -1,19 +1,9 @@
-.plane {
-    padding: 50px 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 80px;
-    place-items: center;
-    min-height: 50vh;
-}
+
 
 .title {
     margin-top: 40px;
 }
 
-.buyBtnContainer {
-    margin-bottom: 30px;
-}
 
 .desc {
     line-height: 24px;
