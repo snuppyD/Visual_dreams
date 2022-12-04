@@ -12,7 +12,6 @@ import { useState } from 'react'
 import { lightTheme, darkTheme } from './styled/ThemeSwitch.styled'
 import { LanguageProvider } from './components/containers-language/language';
 
-import {LanguageSelector} from './components/containers-language/language-selector.js';
 
 function App() {
   const [theme, setTheme] = useState('light')
@@ -23,7 +22,6 @@ function App() {
 
   return (
     <LanguageProvider>
-     {/* <LanguageSelector></LanguageSelector>  */}
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <BrowserRouter>
         <NavBar toggleTheme={toggleTheme} isDarkTheme={isDarkTheme} />

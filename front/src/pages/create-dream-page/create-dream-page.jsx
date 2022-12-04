@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect,useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import 'react-datepicker/dist/react-datepicker.css'
 import { Button } from "../../components/button";
 import { ContentWrapper } from "../../components/content-wrapper";
 import { paths } from "../../paths";
+import { Text,LanguageContext} from '../../components/containers-language/language';
 import { createDream, resetDreamErrors } from "../../store/dream/dreamSlice";
 import styles from "./styles.module.css";
 import { StyledForm,StyledDatePicker } from "../../styled/CreateDreamPage.styled";
@@ -23,6 +24,7 @@ export const CreateDreamPage = () => {
   const [dreamVideo, setDreamVideo] = useState(null);
   const [finalTime, setFinalTime] = useState(null)
 
+  const { dictionary } = useContext(LanguageContext);
   const notify = () => {
     toast('🦄 Dream created!', {
       position: "top-center",
@@ -78,12 +80,12 @@ export const CreateDreamPage = () => {
         isBackButton={true}
         containerClassName={styles.backButtonContainer}
       >
-        Назад
+        <Text tid="backButton" />
       </Button>
       <StyledForm>
-        <h1 className={styles.title}>Створити мрію</h1>
+        <h1 className={styles.title}><Text tid="CreateTitle" /></h1>
         <StyledDatePicker 
-        placeholderText="Оберіть кінцеву дату"
+        placeholderText={dictionary.enterTime}
         selected={finalTime}
         onChange={date => {setFinalTime(date)}}
         error={errors && errors.finalTime && errors.name.finalTime}
@@ -92,35 +94,35 @@ export const CreateDreamPage = () => {
         />
         <StyledInput
           name="name"
-          placeholder="Назва мрії"
+          placeholder={dictionary.enterName}
           error={errors && errors.name && errors.name.message}
           onChange={(e) => setName(e.target.value)}
         />
         <StyledInput
           name="price"
-          placeholder="Ціна мрії"
+          placeholder={dictionary.enterPrice}
           error={errors && errors.price && errors.price.message}
           onChange={(e) => setPrice(+e.target.value)}
         />
         <StyledInput
           name="description"
-          placeholder="Опис"
+          placeholder={dictionary.enterDescription}
           error={errors && errors.description && errors.description.message}
           onChange={(e) => setDescription(e.target.value)}
         />
         <StyledInput
           name="dreamImage"
-          placeholder="Ваше фото"
+          placeholder={dictionary.enterPhoto}
           error={errors && errors.dreamImage && errors.dreamImage.message}
           onChange={(e) => setDreamImage(e.target.value)}
         />
         <StyledInput
           name="dreamVideo"
-          placeholder="Відео"
+          placeholder={dictionary.enterVideo}
           error={errors && errors.dreamVideo && errors.dreamVideo.message}
           onChange={(e) => setDreamVideo(e.target.value)}
         />
-        <Button onClick={()=>{handleCreateDream()}}>Створити</Button>
+        <Button onClick={()=>{handleCreateDream()}}><Text tid="createButton" /></Button>
         {/* <Button onClick={notify}>toasty</Button> */}
         
       </StyledForm>

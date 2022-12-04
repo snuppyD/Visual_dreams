@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const StyledSort = styled.div`
   height: 80px;
-  background-color: #442d85;
+  background-color: ${props => props.theme.colorButtonFon};
   width: 100%;
   margin-bottom: 50px;
   display: flex;
@@ -58,7 +58,6 @@ export const DreamsSortStled = styled.div`
   }
 `
 export const DreamsGrid = styled.div`
-display: flex;
     max-width: 1234px;
     width: 100%;
     margin: 0px auto;
@@ -70,6 +69,8 @@ display: flex;
     gap: 30px;
     margin-bottom: 50px;
     @media (max-width: 390px) {
-    justify-content: column;
+      display: flex;
+      flex-direction: column;
+      width: 360px;      
   }
 `

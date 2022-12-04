@@ -4,6 +4,7 @@ import { getDream, updateDream } from '../../store/dream/dreamSlice'
 import { useParams, useNavigate } from 'react-router-dom'
 import { paths } from '../../paths'
 import { Button } from '../../components/button'
+import { Text} from '../../components/containers-language/language';
 import { StyledForm, StyledDatePicker } from '../../styled/CreateDreamPage.styled'
 import { StyledInput } from '../../styled/Input.Styled'
 import { ContentWrapper } from '../../components/content-wrapper'
@@ -14,7 +15,6 @@ export const EditDreamPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { dream } = useSelector(state => state.dream)
-
   const [name, setName] = useState()
   const [price, setPrice] = useState()
   const [description, setDescription] = useState()
@@ -86,23 +86,23 @@ export const EditDreamPage = () => {
         isBackButton={true}
         containerClassName={styles.backButtonContainer}
       >
-        Назад
+        <Text tid="backButton" />
       </Button>
         <StyledForm>
-          <span>Dreams name</span>
+          <span><Text tid="enterName" /></span>
           <StyledInput type="text" placeholder="name" value={name} onChange={changeName} />
-          <span>Dreams price</span>
+          <span><Text tid="enterPrice" /></span>
           <StyledInput type="text" placeholder="name" value={price} onChange={chancePrice} />
-          <span>Dreams Image</span>
+          <span><Text tid="enterPhoto" /></span>
           <StyledInput type="text" placeholder="name" value={dreamImage} onChange={chanceDreamImage} />
-          <span>Dreams Time</span>
+          <span><Text tid="enterTime" /></span>
           <StyledDatePicker placeholderText="Оберіть кінцеву дату" selected={finalTime} onChange={chanceTime} minDate={new Date()} />
-          <span>Dreams Video</span>
+          <span><Text tid="enterVideo" /></span>
           <StyledInput type="text" placeholder="name" value={dreamVideo} onChange={chanceDreamVideo} />
-          <span>Dreams description</span>
+          <span><Text tid="enterDescription" /></span>
           <StyledInput type="text" placeholder="name" value={description} onChange={chanceDescription} />
           <ContentWrapper>
-            <Button onClick={handleUpdateDream}>Обновити</Button>
+            <Button onClick={handleUpdateDream}><Text tid="updateButton" /></Button>
           </ContentWrapper>
         </StyledForm>
       </ContentWrapper>

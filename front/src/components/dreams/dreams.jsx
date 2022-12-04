@@ -1,14 +1,14 @@
-import React, { useEffect,useState, useRef } from "react";
+import React, { useEffect,useState, useRef,useContext } from "react";
 import Popup from 'reactjs-popup';
 import { useDispatch, useSelector } from "react-redux";
 import { useSortByName,useSortByTime,useSortByPrice } from "../../hooks/useSortDreams";
 import { getDreams } from "../../store/dreams/dreamsSlice";
 import { Button } from "../button";
-import { ContentWrapper } from "../content-wrapper";
+import { Text,LanguageContext} from '../../components/containers-language/language';
 import { DreamItem } from "../dream-item";
 import { Spinner } from "../spinner";
 import styles from "./styles.module.css";
-import { StyledSort,StyledPopUp,SettingsStled, } from "../../styled/Dreams.styled";
+import { StyledSort,StyledPopUp,SettingsStled,DreamsGrid } from "../../styled/Dreams.styled";
 import { StyledInputSearch } from "../../styled/CreateDreamPage.styled";
 import { CreateDreamPage } from "../../pages/create-dream-page/create-dream-page";
 
@@ -16,6 +16,8 @@ import { CreateDreamPage } from "../../pages/create-dream-page/create-dream-page
 
 export const Dreams = () => {
   const dispatch = useDispatch();
+  const { dictionary } = useContext(LanguageContext);
+
   const { dreams, isLoading } = useSelector((state) => state.dreams);
   const { isDescSortByName, setIsDescSortByName, sortedByName } = useSortByName(
     dreams || []
@@ -67,53 +69,47 @@ export const Dreams = () => {
 
   return (
     <div>
-      
       <StyledSort>
         <SettingsStled>
         <StyledInputSearch
 					type="text"
-					placeholder="Search"
+					placeholder={dictionary.searchDream}
 					onChange={e => {setValue(e.target.value);setSort('search');}}
 				/>
           <Button
             className={styles.sortBtn}
             onClick={() => {setIsDescSortByName(!isDescSortByName);setSort('name')}}
           >
-            Sort by name {`${isDescSortByName ? "-" : "+"}`}
+            <Text tid="sortByName" /> {`${isDescSortByName ? "-" : "+"}`}
           </Button>
           <Button
             className={styles.sortBtn}
             onClick={() => {setIsDescSortByPrice(!isDescSortByPrice);setSort('price')}}
           >
-            Sort by price {`${isDescSortByPrice ? "-" : "+"}`}
+            <Text tid="sortByPrice" /> {`${isDescSortByPrice ? "-" : "+"}`}
           </Button>
           <Button
             className={styles.sortBtn}
             onClick={() => {setIsDescSortByTime(!isDescSortByTime);setSort('time')}}
           >
-            Sort by time {`${isDescSortByTime ? "-" : "+"}`}
+            <Text tid="sortByTime" /> {`${isDescSortByTime ? "-" : "+"}`}
           </Button>
 
           <Popup
         ref={ref}
         trigger={
           <StyledPopUp type="button" className="button">
-            New Dream
+            <Text tid="buttonCreate" />
           </StyledPopUp>
         }
       >
         <CreateDreamPage />
       </Popup>
         </SettingsStled>
-        {/* </div> */}
       </StyledSort>
-      <ContentWrapper className={styles.dreamsGrid}>
-      {/* <div> */}
+      <DreamsGrid>
         {sorted()}
-      </ContentWrapper>
-       
-      
-      {/* </div> */}
+      </DreamsGrid>
     </div>
   );
 };

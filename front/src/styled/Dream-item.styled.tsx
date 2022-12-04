@@ -36,5 +36,5 @@ export const StyledTitle = styled.h2`
 export const StyledPrice = styled.span`
   font-size: 30px;
   font-weight: bold;
-  color: #2fb5fc;
+  color: ${props => props.theme.colorItem};
 `

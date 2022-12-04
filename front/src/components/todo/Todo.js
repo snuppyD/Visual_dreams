@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { resetDreamErrors, updateDream } from '../../store/dream/dreamSlice'
 import { StyledInput } from '../../styled/Input.Styled'
+import { Text } from '../../components/containers-language/language'
 import { TodoStyled, TodoTextStyled, BtnStyled, EditPlusStyled, EditStyled, UlStyled } from '../../styled/Todo.styled'
 
 export const Todo = ({ dream }) => {
   const dispatch = useDispatch()
-  const [list, setList] = useState([{ id: '', title: dream.descriptionTodo }])
+  const [list, setList] = useState(dream.descriptionTodo)
   const [inputText, setInputText] = useState('')
   const [editing, setEditing] = useState(false)
   const [editText, setEditText] = useState('')
@@ -53,7 +54,10 @@ export const Todo = ({ dream }) => {
     const result = [].concat(...res)
     const formData = new FormData()
     formData.append('_id', dream._id)
-    formData.append('descriptionTodo', result)
+    for (let data of result) {
+      formData.append('descriptionTodo', data)
+    }
+    // formData.append('descriptionTodo', result)
     for (let pair of formData.entries()) {
       console.log(pair[0] + ', ' + pair[1])
     }
@@ -109,9 +113,12 @@ export const Todo = ({ dream }) => {
           placeholder="Запиши задачу"
         />
 
-        <BtnStyled onClick={() => createNewTodo(inputText)}>Add</BtnStyled>
-        <BtnStyled onClick={() => handleUpdateDream()}>Update</BtnStyled>
-        {/* <Button onClick={handleUpdateDream}>Створити</Button> */}
+        <BtnStyled onClick={() => createNewTodo(inputText)}>
+          <Text tid="addButton" />
+        </BtnStyled>
+        <BtnStyled onClick={() => handleUpdateDream()}>
+          <Text tid="updateButton" />
+        </BtnStyled>
       </UlStyled>
     </>
   )

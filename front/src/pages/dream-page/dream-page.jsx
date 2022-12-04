@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDream,deleteDream } from "../../store/dream/dreamSlice";
 import { Spinner } from "../../components/spinner";
 import { Button } from "../../components/button";
-import {Todo} from '../../components/todo/Todo'
+import {Todo} from '../../components/todo/Todo';
+import { Text } from '../../components/containers-language/language';
 import { StyledDesc,PriceStyled,ButtonPosition,StyledTime,ContentTime,IframeStyled,StyledNameСategory,StyledImgContent,ContentMedia,ContentWrapperDream,StyledDreamTitle,StyledPrice,StyledName } from "../../styled/DreamPage.styled";
 
 export const DreamPage = () => {
@@ -61,19 +62,18 @@ export const DreamPage = () => {
         <StyledDesc>
           <ButtonPosition>
           <Button onClick={() => navigate(-1)} >
-            Назад
+          <Text tid="backButton" />
           </Button>
-          <Button onClick={() => navigate(`/edit-dream/${id}`) }>edit</Button>
-          <Button onClick={() => {dispatch(deleteDream(id));navigate('/order') }}>Delete</Button>
-          <Button
-            
+          <Button onClick={() => navigate(`/edit-dream/${id}`) }><Text tid="editButton" /></Button>
+          <Button onClick={() => {dispatch(deleteDream(id));navigate('/order') }}><Text tid="deleteButton" /></Button>
+          <Button  
             onClick={() => navigate('/') }>
-            На головну
+            <Text tid="homeButton" />
           </Button>
           </ButtonPosition>
           <ContentTime>
-          <StyledNameСategory>Час створення мрії</StyledNameСategory>
-          <StyledNameСategory>Час завершення мрії</StyledNameСategory>
+          <StyledNameСategory><Text tid="titleCreateTime" /></StyledNameСategory>
+          <StyledNameСategory><Text tid="titleDeleteTime" /></StyledNameСategory>
           </ContentTime>
           <ContentTime>
           {finalTime ? <StyledPrice>{new Date(dream.finalTime).toLocaleDateString()}</StyledPrice> : false}
@@ -86,13 +86,13 @@ export const DreamPage = () => {
           <StyledImgContent src={dream.dreamImage} alt="" />
           {dream.dreamVideo? <IframeStyled width="600"  height="400" src={dream.dreamVideo} title="YouTube video player"  frameBorder="0" allowFullScreen></IframeStyled> : false}
           </ContentMedia>
-          <StyledNameСategory>Description:</StyledNameСategory>
+          <StyledNameСategory><Text tid="titleDescription" /></StyledNameСategory>
           <StyledPrice>{dream.description}</StyledPrice>
-          <StyledNameСategory>Time when end dream:</StyledNameСategory>
+          <StyledNameСategory><Text tid="titleTime" /></StyledNameСategory>
           {finalTime? <StyledTime>{ time()}</StyledTime> : false}
-          <StyledNameСategory>Price:</StyledNameСategory>
+          <StyledNameСategory><Text tid="titlePrice" /></StyledNameСategory>
           <PriceStyled>{dream.price} $</PriceStyled>
-          <StyledNameСategory>How much $ to save per day</StyledNameСategory>
+          <StyledNameСategory><Text tid="titlePriceInDay" /></StyledNameСategory>
           {finalTime?<PriceStyled>{cost()} $</PriceStyled> : false}
           
         <ButtonPosition>
